@@ -7,7 +7,7 @@ import type {
 const id = 'stateDiagram';
 
 const detector: DiagramDetector = (txt, config) => {
-  if (/^\s*stateDiagram-v2/.test(txt)) {
+  if (/^\s*stateDiagram-v3/.test(txt)) {
     return true;
   }
   if (/^\s*stateDiagram/.test(txt) && config?.state?.defaultRenderer === 'dagre-wrapper') {

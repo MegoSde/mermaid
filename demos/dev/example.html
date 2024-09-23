@@ -22,15 +22,15 @@
   </head>
   <body>
     <pre id="diagram" class="mermaid">
-graph TB
-      a --> b
-      a --> c
-      b --> d
-      c --> d
+componentDiagram
+accTitle : testTitle
+accDescr : testDescription
+component Webserver
+component WA[Web Api]
     </pre>
-
     <hr />
-    Type code to view diagram:
+    accTitle: This is the accessible title accDescr:This is an accessible description Type code to
+    view diagram:
     <div class="container">
       <textarea name="code" id="code" cols="30" rows="10"></textarea>
       <div id="dynamicDiagram"></div>
@@ -39,29 +39,17 @@ graph TB
 
     <script type="module">
       import mermaid from '/mermaid.esm.mjs';
-      import flowchartELK from '/mermaid-flowchart-elk.esm.mjs';
-      await mermaid.registerExternalDiagrams([flowchartELK]);
-      async function render(str) {
-        const { svg } = await mermaid.render('dynamic', str);
-        document.getElementById('dynamicDiagram').innerHTML = svg;
-      }
-      const storeKey = window.location.pathname;
-      const code = localStorage.getItem(storeKey);
-      if (code) {
-        document.getElementById('code').value = code;
-        await render(code);
-      }
       mermaid.initialize({
-        startOnLoad: true,
-        logLevel: 0,
-      });
-      document.getElementById('code').addEventListener('input', async (e) => {
-        const value = e.target.value;
-        localStorage.setItem(storeKey, value);
-        await render(value);
+        theme: 'default',
+        // themeCSS: '.node rect { fill: red; }',
+        logLevel: 3,
+        securityLevel: 'loose',
+        flowchart: { curve: 'basis' },
+        gantt: { axisFormat: '%m/%d/%Y' },
+        sequence: { actorMargin: 50 },
+        // sequenceDiagram: { actorMargin: 300 } // deprecated
       });
     </script>
-
     <script src="/dev/reload.js"></script>
   </body>
 </html>
